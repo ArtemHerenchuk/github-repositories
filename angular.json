@@ -125,6 +125,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "verenia-test"
+    }
+  },
+  "defaultProject": "verenia-test",
+  "cli": {
+    "analytics": "a516ef1c-19d1-4e11-a306-678c9a606197"
+  }
 }
