@@ -54,13 +54,25 @@ describe('workspace-project App', () => {
   });
 
   it('should add to favorites', () => {
-    const expectedFavotites = '{"repoList":[{"id":338291782,"avatar":"https://avatars.githubusercontent.com/u/11585236?v=4","name":"vereniaTestTaskRepoName3be2c944-6372-4d2f-91d5-3356c52bed67","stargazersCount":0,"description":"Description6821d0eb-b98d-4921-9445-3fef419cb3f6","url":"https://github.com/supfeer/vereniaTestTaskRepoName3be2c944-6372-4d2f-91d5-3356c52bed67","language":null}]}';
+    const expectedFavorites = '{"repoList":[{"id":338291782,"avatar":"https://avatars.githubusercontent.com/u/11585236?v=4","name":"vereniaTestTaskRepoName3be2c944-6372-4d2f-91d5-3356c52bed67","stargazersCount":0,"description":"Description6821d0eb-b98d-4921-9445-3fef419cb3f6","url":"https://github.com/supfeer/vereniaTestTaskRepoName3be2c944-6372-4d2f-91d5-3356c52bed67","language":null}]}';
     const query = 'vereniaTestTaskRepoName3be2c944-6372-4d2f-91d5-3356c52bed67';
     page.searchInput.sendKeys(query);
     element(by.cssContainingText('i', 'Add to favorite')).click();
     const actualFavorites = new LocalStorage().getItem('favorites');
 
-    expect(actualFavorites).toEqual(expectedFavotites);
+    expect(actualFavorites).toEqual(expectedFavorites);
+  });
+
+  it('should remove from favorites', () => {
+    const favorites = '{"repoList":[{"id":338291782,"avatar":"https://avatars.githubusercontent.com/u/11585236?v=4","name":"vereniaTestTaskRepoName3be2c944-6372-4d2f-91d5-3356c52bed67","stargazersCount":0,"description":"Description6821d0eb-b98d-4921-9445-3fef419cb3f6","url":"https://github.com/supfeer/vereniaTestTaskRepoName3be2c944-6372-4d2f-91d5-3356c52bed67","language":null}]}';
+    const expectedFavorites = '{"repoList":[]}';
+    const query = 'vereniaTestTaskRepoName3be2c944-6372-4d2f-91d5-3356c52bed67';
+    new LocalStorage().setItem('favorites', favorites);
+    page.searchInput.sendKeys(query);
+    element(by.cssContainingText('i', 'Remove from favorite')).click();
+    const actualFavorites = new LocalStorage().getItem('favorites');
+
+    expect(actualFavorites).toEqual(expectedFavorites);
   });
 
   afterEach(async () => {
